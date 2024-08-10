@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "ui-design",
+    "slug": "snack-6885af32-dff0-4b41-b43f-7f4c6b420e47",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "fonts": [
+      {
+        "asset": "fonts/Poppins-Regular.ttf",
+        "family": "Poppins_400Regular"
+      },
+      {
+        "asset": "fonts/Poppins-SemiBold.ttf",
+        "family": "Poppins_600SemiBold"
+      },
+      {
+        "asset": "fonts/Poppins-Bold.ttf",
+        "family": "Poppins_700Bold"
+      }
+    ],
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
