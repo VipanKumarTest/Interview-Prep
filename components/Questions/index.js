@@ -3,7 +3,7 @@ import { View, Text, FlatList, StyleSheet, SafeAreaView, TouchableOpacity, TextI
 import { Ionicons } from '@expo/vector-icons';
 import questions from '../../utils/data';
 
-const QuestionList = ({ radius }) => {
+const QuestionList = ({ navigation, radius }) => {
     const [searchText, setSearchText] = useState('');
     const [filteredQuestions, setFilteredQuestions] = useState(questions);
 
@@ -15,7 +15,13 @@ const QuestionList = ({ radius }) => {
     }, [searchText]);
 
     const renderItem = ({ item, index }) => (
-        <TouchableOpacity style={styles.questionCard} onPress={() => console.log(`Question ${index + 1} pressed`)}>
+        <TouchableOpacity
+            style={styles.questionCard}
+            onPress={() => navigation.navigate("AnswerScreenScreen", {
+                question: item,
+                questionIndex: index
+            })}
+        >
             <View style={styles.questionHeader}>
                 <View style={styles.questionNumberContainer}>
                     <Text style={styles.questionNumber}>{index + 1}</Text>

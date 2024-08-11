@@ -4,13 +4,18 @@ import { Card, Title, Paragraph, IconButton } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { LinearGradient } from 'expo-linear-gradient';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { useRoute } from '@react-navigation/native';
 import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold } from '@expo-google-fonts/poppins';
 
-const AnswerComponent = () => {
-    const [question, setQuestion] = useState("What is Kotlin?");
+const AnswerComponent = (props) => {
     const [answer, setAnswer] = useState("Kotlin is a modern, expressive, and safe programming language developed by JetBrains. It is fully interoperable with Java and runs on the Java Virtual Machine (JVM). Kotlin is designed to be more concise and safer than Java, while still maintaining full compatibility with Java code.");
     const [isListening, setIsListening] = useState(false);
     const [recognizedText, setRecognizedText] = useState('');
+    const route = useRoute();
+    const { question, questionIndex } = route.params;
+
+    console.log('Question:', question);
+    console.log('Question Index:', questionIndex);
 
     let [fontsLoaded] = useFonts({
         Poppins_400Regular,
@@ -63,7 +68,7 @@ const AnswerComponent = () => {
                     end={{ x: 1, y: 0 }}
                     style={styles.headerGradient}
                 >
-                    <Text style={styles.title}>Kotlin Quiz</Text>
+                    <Text style={styles.title}>AI Generated Answer</Text>
                 </LinearGradient>
 
                 <Card style={styles.card}>
@@ -140,7 +145,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'Poppins_700Bold',
-        fontSize: 28,
+        fontSize: 20,
         color: '#ffffff',
         textAlign: 'center',
     },
@@ -218,7 +223,7 @@ const styles = StyleSheet.create({
         height: 45,
         borderRadius: 22.5,
         overflow: 'hidden',
-        backgroundColor: '#3498DB', // Bright blue for microphone button
+        backgroundColor: '#3498DB',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -226,7 +231,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         paddingHorizontal: 20,
         paddingVertical: 10,
-        backgroundColor: '#2ECC71', // Green for send button
+        backgroundColor: '#2ECC71',
         borderRadius: 25,
     },
     sendButtonText: {

@@ -119,7 +119,7 @@ const EditProfile = () => {
     return (
         <ScrollView style={styles.scrollView}>
             <LinearGradient
-                colors={['#4c669f', '#3b5998', '#192f6a']}
+                colors={['#4e54c8', '#8f94fb']}
                 style={styles.headerGradient}
             >
                 <View style={styles.headerContent}>

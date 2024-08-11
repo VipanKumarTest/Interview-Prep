@@ -83,8 +83,8 @@ const ProfilePage = ({ navigation }) => {
             </LinearGradient>
 
             <View style={styles.container}>
-                <TouchableOpacity style={styles.editProfileButton}>
-                    <Text style={styles.editProfileText}>Edit Profile</Text>
+                <TouchableOpacity style={styles.editProfileButton} onPress={() => navigation.navigate('ProfileEditScreen')}>
+                    <Text style={styles.editProfileText}>Edit Profilerr</Text>
                 </TouchableOpacity>
 
                 <View style={styles.infoCard}>
@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
     scrollView: {
         flex: 1,
         backgroundColor: '#f0f2f5',
+        marginBottom: 60
     },
     headerGradient: {
         height: 250,

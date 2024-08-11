@@ -4,12 +4,12 @@ import { ScrollView } from 'react-native-virtualized-view';
 import QuestionList from '../Questions';
 
 
-const Bookmarks = () => {
+const Bookmarks = ({ navigation }) => {
 
     return (
         <ScrollView contentContainerStyle={styles.scrollContent}>
             <Text style={styles.title}>Saved Questions</Text>
-            <QuestionList radius={10} />
+            <QuestionList navigation={navigation} radius={10} />
         </ScrollView>
     );
 };
