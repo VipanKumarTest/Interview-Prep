@@ -3,6 +3,10 @@ import QuestionList from './components/Questions'
 import BottomNavBar from './components/BottomNav/BottomNavBar'
 import ProfilePage from './components/Profile';
 import EditProfile from './components/Profile/EditProfile';
+import ChatAIComponent from './components/ChatAI';
+import HomeComponent from './components/Home';
+import Bookmarks from './components/Bookmarks';
+import AnswerComponent from './components/Questions/AnswerComponent';
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('Home');
@@ -14,11 +18,15 @@ const App = () => {
   return (
     <>
       {/* <QuestionList /> */}
-      {/* <BottomNavBar activeTab={activeTab} onTabPress={handleTabPress} /> */}
+      <BottomNavBar activeTab={activeTab} onTabPress={handleTabPress} />
       {/* <ProfilePage /> */}
-      <EditProfile />
+      {/* <EditProfile /> */}
+      {/* <ChatAIComponent /> */}
+      <HomeComponent />
+      {/* <Bookmarks /> */}
+      {/* <AnswerComponent /> */}
     </>
   )
 }
 
-export default App
+export default App;

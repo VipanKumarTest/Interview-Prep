@@ -1,31 +1,45 @@
-import React from 'react';
-import { View, Text, FlatList, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
-import { Card, Title, Paragraph } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Header from '../Home/Header';
-import questions from '../../utils/data'
-import colors from '../../utils/colors';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, StyleSheet, SafeAreaView, TouchableOpacity, TextInput } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import questions from '../../utils/data';
 
-const QuestionList = () => {
+const QuestionList = ({ radius }) => {
+    const [searchText, setSearchText] = useState('');
+    const [filteredQuestions, setFilteredQuestions] = useState(questions);
+
+    useEffect(() => {
+        const filtered = questions.filter((question) =>
+            question.toLowerCase().includes(searchText.toLowerCase())
+        );
+        setFilteredQuestions(filtered);
+    }, [searchText]);
+
     const renderItem = ({ item, index }) => (
-        <TouchableOpacity onPress={() => console.log(`Question ${index + 1} pressed`)}>
-            <Card style={styles.card}>
-                <Card.Content>
-                    <View style={styles.questionHeader}>
-                        <Icon name="help-circle-outline" size={24} color={colors.primary} />
-                        <Title style={styles.questionNumber}>Question {index + 1}</Title>
-                    </View>
-                    <Paragraph style={styles.questionText}>{item}</Paragraph>
-                </Card.Content>
-            </Card>
+        <TouchableOpacity style={styles.questionCard} onPress={() => console.log(`Question ${index + 1} pressed`)}>
+            <View style={styles.questionHeader}>
+                <View style={styles.questionNumberContainer}>
+                    <Text style={styles.questionNumber}>{index + 1}</Text>
+                </View>
+                <Text style={styles.questionText}>{item}</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={24} color="#4c669f" />
         </TouchableOpacity>
     );
 
     return (
         <SafeAreaView style={styles.container}>
-            <Header />
+            <View style={[styles.searchContainer, { borderRadius: radius }]}>
+                <Ionicons name="search" size={20} color="#777" style={styles.searchIcon} />
+                <TextInput
+                    style={styles.searchInput}
+                    value={searchText}
+                    onChangeText={setSearchText}
+                    placeholder='Search questions...'
+                    placeholderTextColor="#999"
+                />
+            </View>
             <FlatList
-                data={questions}
+                data={filteredQuestions}
                 renderItem={renderItem}
                 keyExtractor={(item, index) => index.toString()}
                 contentContainerStyle={styles.listContainer}
@@ -37,38 +51,61 @@ const QuestionList = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#f0f2f5',
     },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: '#6200ee',
-        textAlign: 'center',
-        marginVertical: 20,
+    searchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        margin: 16,
+        paddingHorizontal: 15,
+        elevation: 3,
+    },
+    searchIcon: {
+        marginRight: 10,
+    },
+    searchInput: {
+        flex: 1,
+        fontSize: 16,
+        color: '#333',
+        paddingVertical: 12,
     },
     listContainer: {
         padding: 16,
         paddingBottom: 70
     },
-    card: {
-        marginBottom: 16,
-        backgroundColor: '#ffffff',
+    questionCard: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        borderRadius: 12,
+        padding: 16,
+        marginBottom: 12,
+        elevation: 2,
     },
     questionHeader: {
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 8,
+    },
+    questionNumberContainer: {
+        width: 30,
+        height: 30,
+        borderRadius: 15,
+        backgroundColor: '#4c669f',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 12,
     },
     questionNumber: {
-        fontSize: 18,
+        color: 'white',
         fontWeight: 'bold',
-        color: colors.primary,
-        marginLeft: 8,
     },
     questionText: {
+        flex: 1,
         fontSize: 16,
-        color: '#333333',
-        lineHeight: 24,
+        color: '#333',
     },
 });
 

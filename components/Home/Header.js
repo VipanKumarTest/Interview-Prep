@@ -1,68 +1,58 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import ProfileModal from './ProfileModal';
-import colors from '../../utils/colors';
-
 
 const Header = () => {
     const [modalVisible, setModalVisible] = useState(false);
 
     return (
-        <View style={styles.header}>
-            <View style={styles.nameProfile}>
-                <Text style={styles.headerText}>AI Interview Prep..</Text>
+        <LinearGradient
+            colors={['#4c669f', '#3b5998', '#192f6a']}
+            style={styles.header}
+        >
+            <StatusBar barStyle="light-content" />
+            <View style={styles.headerContent}>
+                <View>
+                    <Text style={styles.headerText}>AI Interview Prep</Text>
+                    <Text style={styles.subHeaderText}>Your Personal Assistant</Text>
+                </View>
                 <TouchableOpacity style={styles.profileButton} onPress={() => setModalVisible(true)}>
-                    <View style={styles.profileImage}>
-                        <Text style={styles.profileText}>V</Text>
-                    </View>
+                    <Ionicons name="person-circle-outline" size={40} color="white" />
                 </TouchableOpacity>
             </View>
-            <Text style={styles.subHeaderText}>Assistant Pro</Text>
             <ProfileModal visible={modalVisible} onClose={() => setModalVisible(false)} />
-        </View>
+        </LinearGradient>
     );
 };
 
 const styles = StyleSheet.create({
     header: {
-        backgroundColor: colors.primary,
-        padding: 20,
-        borderBottomLeftRadius: 35,
-        borderBottomRightRadius: 35,
+        paddingTop: 60,
+        paddingBottom: 20,
+        paddingHorizontal: 20,
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
     },
-    nameProfile: {
+    headerContent: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
     },
     headerText: {
         color: 'white',
-        fontSize: 30,
+        fontSize: 28,
         fontWeight: 'bold',
     },
     subHeaderText: {
-        color: 'lightgrey',
-        fontSize: 20,
+        color: 'rgba(255, 255, 255, 0.8)',
+        fontSize: 16,
         marginTop: 5,
     },
     profileButton: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
-        overflow: 'hidden',
-        borderWidth: 2,
-        borderColor: '#fff',
+        padding: 5,
     },
-    profileImage: {
-        width: '100%',
-        height: '100%',
-        backgroundColor: colors.activeTab,
-    },
-    profileText: {
-        color: 'white',
-        fontSize: 30,
-        textAlign: 'center',
-    }
 });
 
 export default Header;
