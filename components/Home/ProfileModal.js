@@ -1,9 +1,14 @@
 import React from 'react';
-import { Alert, View, Text, StyleSheet, Modal, TouchableOpacity } from 'react-native';
+import { Alert, View, Text, StyleSheet, Modal, TouchableOpacity, ToastAndroid } from 'react-native';
 import { FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { logOutService } from '../../auth/AuthServices';
 
-const ProfileModal = ({ visible, onClose }) => {
-
+const ProfileModal = ({ visible, onClose, navigation }) => {
+    const handleLogout = () => {
+        ToastAndroid.show(`Logout Successful!`, ToastAndroid.SHORT);
+        logOutService();
+        navigation.navigate('LoginScreen');
+    }
     return (
         <Modal
             animationType="slide"
@@ -21,7 +26,7 @@ const ProfileModal = ({ visible, onClose }) => {
                         <Ionicons name="settings-outline" size={20} color="#333" style={styles.icon} />
                         <Text style={styles.optionText}>Settings</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.option} >
+                    <TouchableOpacity style={styles.option} onPress={handleLogout} >
                         <MaterialIcons name="logout" size={20} color="#FF3B30" style={styles.icon} />
                         <Text style={[styles.optionText, { color: '#FF3B30' }]}>Logout</Text>
                     </TouchableOpacity>

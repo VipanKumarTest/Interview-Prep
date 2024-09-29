@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, StatusBar, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import ProfileModal from './ProfileModal';
 
-const Header = () => {
+const Header = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
 
     return (
@@ -19,15 +19,24 @@ const Header = () => {
                     <Text style={styles.subHeaderText}>Your Personal Assistant</Text>
                 </View>
                 <TouchableOpacity style={styles.profileButton} onPress={() => setModalVisible(true)}>
-                    <Ionicons name="person-circle-outline" size={40} color="white" />
+                    <Image
+                        style={styles.menu}
+                        source={
+                            require('../../assets/menu.png')
+                        }
+                    />
                 </TouchableOpacity>
             </View>
-            <ProfileModal visible={modalVisible} onClose={() => setModalVisible(false)} />
+            <ProfileModal visible={modalVisible} navigation={navigation} onClose={() => setModalVisible(false)} />
         </LinearGradient>
     );
 };
 
 const styles = StyleSheet.create({
+    menu: {
+        width: 40,
+        height: 40,
+    },
     header: {
         paddingTop: 60,
         paddingBottom: 20,

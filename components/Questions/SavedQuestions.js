@@ -5,11 +5,13 @@ import questions from '../../utils/data';
 import { UserContext } from '../../context/userContextProvider';
 import PQValidation from './PremiumQuestions';
 
-const QuestionList = ({ navigation, radius, bookmarkIndex }) => {
+const SavedQuestion = ({ navigation, radius, bookmarkIndex }) => {
     const [searchText, setSearchText] = useState('');
     const [filteredQuestions, setFilteredQuestions] = useState(questions);
     const { aboutUserInfo } = useContext(UserContext);
     const [modalVisible, setModalVisible] = useState(false);
+
+    const savedQueList = bookmarkIndex.map(index => filteredQuestions[index]);
 
     useEffect(() => {
         const filtered = questions.filter((question) =>
@@ -67,7 +69,7 @@ const QuestionList = ({ navigation, radius, bookmarkIndex }) => {
                 />
             </View>
             <FlatList
-                data={filteredQuestions}
+                data={savedQueList}
                 renderItem={renderItem}
                 keyExtractor={(item, index) => index.toString()}
                 contentContainerStyle={styles.listContainer}
@@ -147,4 +149,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default QuestionList;
+export default SavedQuestion;

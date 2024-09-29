@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput, ScrollView, FlatList } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput, ScrollView, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
+import { UserContext } from '../../context/userContextProvider';
+import { addOrUpdateUser } from '../../firebase/firestoreAPIs';
 
 const EditProfile = () => {
+    const { aboutUserInfo, setAboutUserInfo } = useContext(UserContext);
     const [userData, setUserData] = useState({
+        uid: '',
         name: '',
         username: '',
         email: '',
@@ -15,8 +19,32 @@ const EditProfile = () => {
         workExperience: [],
         education: [],
         skills: [],
-        certifications: []
+        certifications: [],
+        bookmarks: []
     });
+
+    useEffect(() => {
+        if (aboutUserInfo && aboutUserInfo.uid) {
+            setUserData(aboutUserInfo);
+        }
+    }, [aboutUserInfo]);
+
+    useEffect(() => {
+        setUserData(aboutUserInfo);
+        console.log('Saving aboutUserInfo data:', aboutUserInfo);
+
+    }, [aboutUserInfo])
+
+    const handleSave = async () => {
+        try {
+            await addOrUpdateUser(userData.uid, userData);
+            setAboutUserInfo(userData);
+            Alert.alert('Success', 'Profile saved successfully!');
+        } catch (error) {
+            console.error('Error saving profile: ', error);
+            Alert.alert('Error', 'Failed to save profile. Please try again.');
+        }
+    };
 
     const fieldConfigs = {
         workExperience: [
@@ -111,10 +139,6 @@ const EditProfile = () => {
             </TouchableOpacity>
         </View>
     );
-
-    const handleSave = () => {
-        console.log('Saving user data:', userData);
-    };
 
     return (
         <ScrollView style={styles.scrollView}>

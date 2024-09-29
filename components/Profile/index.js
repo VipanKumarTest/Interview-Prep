@@ -1,64 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-virtualized-view';
+import { UserContext } from '../../context/userContextProvider';
 
 const ProfilePage = ({ navigation }) => {
-    const [userData, setUserData] = useState({
-        name: 'John Doe',
-        username: 'johndoe123',
-        email: 'john.doe@example.com',
-        phone: '+1 234 567 8900',
-        location: 'New York, NY',
-        professionalTitle: 'Software Developer',
-        summary: 'Experienced software developer with a passion for creating efficient and scalable applications.',
-        workExperience: [
-            {
-                id: '1',
-                title: 'Senior Developer',
-                company: 'Tech Co.',
-                dates: '2020 - Present',
-                description: 'Led development of multiple web applications.'
-            },
-            {
-                id: '2',
-                title: 'Junior Developer',
-                company: 'Start Up Inc.',
-                dates: '2018 - 2020',
-                description: 'Assisted in the development of mobile apps.'
-            }
-        ],
-        education: [
-            {
-                id: '1',
-                degree: 'Bachelor of Science in Computer Science',
-                institution: 'University of Technology',
-                graduationDate: '2018'
-            }
-        ],
-        skills: ['JavaScript', 'React', 'Node.js', 'Python', 'SQL'],
-        certifications: [
-            {
-                id: '1',
-                name: 'AWS Certified Developer',
-                issuer: 'Amazon Web Services',
-                date: '2022'
-            }
-        ]
-    });
+    const { aboutUserInfo } = useContext(UserContext);
 
     const renderListItem = ({ item, type }) => (
         <View style={styles.listItem}>
-            <Text style={styles.listItemTitle}>{item.title || item.degree || item.name}</Text>
+            <Text style={styles.listItemTitle}>{item.position || item.course || item.name}</Text>
             {type === 'work' && (
                 <>
-                    <Text style={styles.listItemSubtitle}>{item.company} | {item.dates}</Text>
+                    <Text style={styles.listItemSubtitle}>{item.company} | {item.startDate} - {item.endDate || 'Present'}</Text>
                     <Text style={styles.listItemDescription}>{item.description}</Text>
                 </>
             )}
             {type === 'education' && (
-                <Text style={styles.listItemSubtitle}>{item.institution} | {item.graduationDate}</Text>
+                <Text style={styles.listItemSubtitle}>{item.college} | {item.startYear} - {item.graduationYear}</Text>
             )}
             {type === 'certification' && (
                 <Text style={styles.listItemSubtitle}>{item.issuer} | {item.date}</Text>
@@ -77,14 +37,14 @@ const ProfilePage = ({ navigation }) => {
                         source={require('../../assets/profile.png')}
                         style={styles.profileImage}
                     />
-                    <Text style={styles.name}>{userData.name}</Text>
-                    <Text style={styles.tagline}>{userData.professionalTitle}</Text>
+                    <Text style={styles.name}>{aboutUserInfo?.name}</Text>
+                    <Text style={styles.tagline}>{aboutUserInfo?.professionalTitle}</Text>
                 </View>
             </LinearGradient>
 
             <View style={styles.container}>
                 <TouchableOpacity style={styles.editProfileButton} onPress={() => navigation.navigate('ProfileEditScreen')}>
-                    <Text style={styles.editProfileText}>Edit Profilerr</Text>
+                    <Text style={styles.editProfileText}>Edit Profile</Text>
                 </TouchableOpacity>
 
                 <View style={styles.infoCard}>
@@ -92,7 +52,7 @@ const ProfilePage = ({ navigation }) => {
                         <Ionicons name="person-outline" size={24} color="#4c669f" />
                         <View style={styles.fieldTextContainer}>
                             <Text style={styles.fieldLabel}>Username</Text>
-                            <Text style={styles.fieldValue}>{userData.username}</Text>
+                            <Text style={styles.fieldValue}>{aboutUserInfo?.username}</Text>
                         </View>
                     </View>
 
@@ -100,7 +60,7 @@ const ProfilePage = ({ navigation }) => {
                         <Ionicons name="mail-outline" size={24} color="#4c669f" />
                         <View style={styles.fieldTextContainer}>
                             <Text style={styles.fieldLabel}>Email</Text>
-                            <Text style={styles.fieldValue}>{userData.email}</Text>
+                            <Text style={styles.fieldValue}>{aboutUserInfo?.email}</Text>
                         </View>
                     </View>
 
@@ -108,7 +68,7 @@ const ProfilePage = ({ navigation }) => {
                         <Ionicons name="call-outline" size={24} color="#4c669f" />
                         <View style={styles.fieldTextContainer}>
                             <Text style={styles.fieldLabel}>Phone</Text>
-                            <Text style={styles.fieldValue}>{userData.phone}</Text>
+                            <Text style={styles.fieldValue}>{aboutUserInfo?.phone}</Text>
                         </View>
                     </View>
 
@@ -116,20 +76,20 @@ const ProfilePage = ({ navigation }) => {
                         <Ionicons name="location-outline" size={24} color="#4c669f" />
                         <View style={styles.fieldTextContainer}>
                             <Text style={styles.fieldLabel}>Location</Text>
-                            <Text style={styles.fieldValue}>{userData.location}</Text>
+                            <Text style={styles.fieldValue}>{aboutUserInfo?.location}</Text>
                         </View>
                     </View>
                 </View>
 
                 <View style={styles.sectionCard}>
                     <Text style={styles.sectionTitle}>Professional Summary</Text>
-                    <Text style={styles.sectionContent}>{userData.summary}</Text>
+                    <Text style={styles.sectionContent}>{aboutUserInfo?.summary}</Text>
                 </View>
 
                 <View style={styles.sectionCard}>
                     <Text style={styles.sectionTitle}>Work Experience</Text>
                     <FlatList
-                        data={userData.workExperience}
+                        data={aboutUserInfo?.workExperience}
                         renderItem={({ item }) => renderListItem({ item, type: 'work' })}
                         keyExtractor={item => item.id}
                     />
@@ -138,7 +98,7 @@ const ProfilePage = ({ navigation }) => {
                 <View style={styles.sectionCard}>
                     <Text style={styles.sectionTitle}>Education</Text>
                     <FlatList
-                        data={userData.education}
+                        data={aboutUserInfo?.education}
                         renderItem={({ item }) => renderListItem({ item, type: 'education' })}
                         keyExtractor={item => item.id}
                     />
@@ -147,7 +107,7 @@ const ProfilePage = ({ navigation }) => {
                 <View style={styles.sectionCard}>
                     <Text style={styles.sectionTitle}>Skills</Text>
                     <View style={styles.skillsContainer}>
-                        {userData.skills.map((skill, index) => (
+                        {aboutUserInfo?.skills.map((skill, index) => (
                             <View key={index} style={styles.skillBadge}>
                                 <Text style={styles.skillText}>{skill}</Text>
                             </View>
@@ -155,18 +115,21 @@ const ProfilePage = ({ navigation }) => {
                     </View>
                 </View>
 
-                <View style={styles.sectionCard}>
-                    <Text style={styles.sectionTitle}>Certifications</Text>
-                    <FlatList
-                        data={userData.certifications}
-                        renderItem={({ item }) => renderListItem({ item, type: 'certification' })}
-                        keyExtractor={item => item.id}
-                    />
-                </View>
+                {aboutUserInfo?.certifications && aboutUserInfo?.certifications.length > 0 && (
+                    <View style={styles.sectionCard}>
+                        <Text style={styles.sectionTitle}>Certifications</Text>
+                        <FlatList
+                            data={aboutUserInfo?.certifications}
+                            renderItem={({ item }) => renderListItem({ item, type: 'certification' })}
+                            keyExtractor={item => item.id}
+                        />
+                    </View>
+                )}
             </View>
         </ScrollView>
     );
 }
+
 
 const styles = StyleSheet.create({
     scrollView: {
