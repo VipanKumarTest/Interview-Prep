@@ -1,16 +1,16 @@
-# AI Interview Application
+# AI Interview Preparation Application
 
-A React Native application built with Expo, designed to assist in preparing for AI-based interviews.
+A React Native application built with Expo, designed to assist in preparing for AI-based interviews Question and it will give you the perfect answers.
 
 ## Features
 
 - **User-Friendly Interface**: Simple and intuitive design for easy navigation.
-- **Interview Questions Preparation**: Tailored content to help you prepare for AI-based interviews Questions.
-- **Interactive Experience**: Engage with the application to simulate real interview Questions.
+- **Interview Questions Preparation**: Tailored content to help you prepare for AI-based interviews Questions with their appropriate answers.
+- **Interactive Experience**: Engage with the application to simulate real interview Questions with their appropriate answers.
 
 ## Installation
 
-To get started with the AI Interview Application, follow these steps:
+To get started with the AI Interview Question Application, follow these steps:
 
 1. Clone the repository:
 
