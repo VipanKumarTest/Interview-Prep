@@ -48,13 +48,14 @@ Contributions are welcome! If you have suggestions or improvements, feel free to
 
 ## Screenshots
 
-<img src="https://github.com/user-attachments/assets/0d2b38ae-9ca5-439d-ae45-73dd150a84bd" alt="WhatsApp Image 2024-08-15 at 00 25 08_4c0dcdec" width="200"/>
-<img src="https://github.com/user-attachments/assets/7de754a2-2bba-4f37-9fe8-60b74261e5e7" alt="WhatsApp Image 2024-08-15 at 00 25 11_a2855167" width="200"/>
-<img src="https://github.com/user-attachments/assets/2bf5333d-31c7-4319-935a-358ed4fdbf57" alt="WhatsApp Image 2024-08-15 at 00 25 08_0801f76d" width="200"/>
-<img src="https://github.com/user-attachments/assets/bbd5c370-acd4-4005-b4a0-a760ea0c7b03" alt="WhatsApp Image 2024-08-15 at 00 25 10_23b64ee5" width="200"/>
-<img src="https://github.com/user-attachments/assets/045b96b9-bc5f-4a39-8e74-f1b106de0ddb" alt="WhatsApp Image 2024-08-15 at 00 25 10_6cee6989" width="200"/>
-<img src="https://github.com/user-attachments/assets/0873a54c-e45d-448d-a087-fb0b7084401d" alt="WhatsApp Image 2024-08-15 at 00 25 09_5f224308" width="200"/>
-<img src="https://github.com/user-attachments/assets/d2aede3b-3a19-4c7b-99eb-50a822f24aab" alt="WhatsApp Image 2024-08-15 at 00 25 10_f32cdab7" width="200"/>
+<img width="200" alt="image" src="https://github.com/user-attachments/assets/88d50c07-a2f2-43b8-a2e4-34435756fcf5" />
+<img width="200" alt="image" src="https://github.com/user-attachments/assets/eae8fae3-cbe6-4e55-ba9a-df6b472d8019" />
+<img width="200" alt="image" src="https://github.com/user-attachments/assets/c8e17096-fb5e-4e76-a27f-a8a1cb29d1a0" />
+<img width="200" alt="image" src="https://github.com/user-attachments/assets/1fcf396b-0c19-4217-96ea-9e4f42c00ffc" />
+<img width="200" alt="image" src="https://github.com/user-attachments/assets/d325f8d1-4724-4b70-a608-84158817be60" />
+<img width="200" alt="image" src="https://github.com/user-attachments/assets/dd18f098-575b-4449-add5-93ae70f8208d" />
+<img width="200" alt="image" src="https://github.com/user-attachments/assets/fb5d40a5-8a19-4e7a-aec0-3806dd507733" />
+
 
 
 ## Contact
